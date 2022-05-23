@@ -25,6 +25,7 @@ public class LoginActivity  extends AppCompatActivity  {
     EditText edtUsername;
     EditText edtPassword;
     Button btnLogin;
+    Button btnRegister;
     UserService userService;
     SharedPreferences sp;
 
@@ -36,7 +37,16 @@ public class LoginActivity  extends AppCompatActivity  {
         edtUsername = (EditText) findViewById(R.id.edtUsername);
         edtPassword = (EditText) findViewById(R.id.edtPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnRegister = (Button) findViewById(R.id.btnRegister);
         userService = ApiUtils.getUserService();
+
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +91,8 @@ public class LoginActivity  extends AppCompatActivity  {
                         SharedPreferences.Editor editor = sp.edit();
 
                         editor.putString("x-access-token", resObj.getAccessToken());
+                        editor.putString("username", resObj.getUsername());
+                        editor.putString("email", resObj.getEmail());
                         editor.commit();
 
                         //login start main activity

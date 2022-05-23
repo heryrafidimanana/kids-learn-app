@@ -9,4 +9,7 @@ import retrofit2.http.POST;
 public interface UserService {
     @POST("api/auth/signin")
     Call<ResObj> login(@Body UserModel userModel);
+
+    @POST("api/auth/signup")
+    Call<ResObj> register(@Body UserModel userModel);
 }

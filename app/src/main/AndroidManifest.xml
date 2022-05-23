@@ -10,10 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DisplayVideoActivity"
+            android:exported="false" />
+        <activity
             android:name=".NavActivity"
             android:exported="false"
             android:label="@string/title_activity_nav"
-            android:theme="@style/Theme.MyApplication.NoActionBar" />
+            android:theme="@style/Theme.MyApplication.NoActionBar"/>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
         <activity

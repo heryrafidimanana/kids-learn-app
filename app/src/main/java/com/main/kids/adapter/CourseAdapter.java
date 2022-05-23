@@ -1,6 +1,8 @@
 package com.main.kids.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,9 @@ import android.widget.TextView;
 import com.main.kids.R;
 import com.main.kids.model.Course;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -35,7 +40,21 @@ public class CourseAdapter extends ArrayAdapter<Course> {
             view = LayoutInflater.from(context).inflate(R.layout.item_course_list, null);
 
         ImageView courseImage = (ImageView) view.findViewById(R.id.course_img);
-        courseImage.setImageResource(/*course.getImg()*/ 0);
+        Thread thread = new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                try  {
+                    URL url = new URL(course.getImg());
+                    Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                    courseImage.setImageBitmap(bmp);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
 
         TextView courseDescription = (TextView) view.findViewById(R.id.course_description);
         courseDescription.setText(course.getDescription());

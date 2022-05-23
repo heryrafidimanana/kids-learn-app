@@ -10,13 +10,37 @@
     <string name="title_activity_nav">NavActivity</string>
 
     <!--    <string name="menu_home">Home</string>-->
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_gallery">Evaluation</string>
+    <string name="menu_slideshow">Logout</string>
 
     <string name="menu_home">Course</string>
     <string name="menu_evaluation">Evaluation</string>
     <string name="menu_logout">Logout</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
     <!--    <string name="menu_slideshow">Slideshow</string>-->
+
+    <!-- Quizz score -->
+    <string name="mauvais">Tu as encore des progrès à faire</string>
+    <string name="moyen">Courage, tu y es presque!</string>
+    <string name="bien">Bien, tu as un bon score!</string>
+    <string name="tresbien">Bravo! Tu es un as du calcul!</string>
+
+    <string name="qrequis">Veuillez insérer une valeur!</string>
+    <string name="qbadrep">Mauvaise réponse, la bonne était </string>
+    <string name="qgoodrep">Bonne réponse!</string>
+    <string name="qtermine">Quizz terminé!</string>
+    <string name="quitter">Quitter</string>
+    <string name="encore">Encore !</string>
+    <string name="validation">Valider</string>
+    <string name="qsuivante">Question suivante</string>
 </resources>
