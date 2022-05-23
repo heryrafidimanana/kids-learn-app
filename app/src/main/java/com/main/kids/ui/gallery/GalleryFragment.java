@@ -1,6 +1,9 @@
 package com.main.kids.ui.gallery;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -28,6 +33,7 @@ public class GalleryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         GalleryViewModel galleryViewModel =
                 new ViewModelProvider(this).get(GalleryViewModel.class);
+        createNotificationChannel();
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -61,9 +67,31 @@ public class GalleryFragment extends Fragment {
             ((LinearLayout)root.findViewById(R.id.quizzon)).setVisibility(View.GONE);
             ((LinearLayout)root.findViewById(R.id.quizzoff)).setVisibility(View.VISIBLE);
             Toast.makeText(getActivity(), getResources().getString(R.string.qtermine), Toast.LENGTH_LONG).show();
+
+            NotificationCompat.Builder builder = new NotificationCompat.Builder( getActivity(), "my_channel_01")
+                    .setSmallIcon(R.drawable.ic_alert)
+                    .setContentTitle("Quiz finished")
+                    .setContentText("Congratulation, you finish the quiz with "+evaluation.getScore()+" points :)")
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getActivity());
+            notificationManager.notify(0, builder.build());
         } else {
             evaluation.nextQuestion();
             ((TextView) root.findViewById(R.id.question)).setText(this.evaluation.getQuestion());
+        }
+    }
+
+    private void createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            CharSequence name = "kids";
+            String description = "Congratulation, you finish the quiz :)";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("my_channel_01", name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getActivity().getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 
